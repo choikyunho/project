@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p><%= username %>님 환영합니다.</p> 
+    <a href="/logout">로그아웃</a>
+    <a href="/inputmoney">입금하기</a>
+    <a href="/outputmoney">출금하기</a>
+    <!-- <p><%= result %></p>  -->
+    <br><br>
+ 
+    <% if (result == ""){ %>
+      <a href="/inputmoney" class="btn btn-primary">입금내역입력하기</a>
+      <a href="/outputmoney" class="btn btn-primary">출금내역입력하기</a>
+    <% } else { %>
+      <p>잔액표시하기</p>
+      <p> <%= result %></p>
+      <p> <%= result1 %></p>
+    <% } %>
+
+
+    <!-- //////////////////////////////////////////////////////////////////////////////////// -->
+    <% if (result == ""){ %>
+      <a href="/inputmoney" class="btn btn-primary">입금내역입력하기</a>
+      <a href="/outputmoney" class="btn btn-primary">출금내역입력하기</a>
+    <% } else { %>
+      <p>입출금내역표시</p>
+      <% const data = JSON.parse(result) %>
+      <% const data1 = JSON.parse(result1) %>
+      <!-- <p> <%= result %></p> -->
+      <div class="row row-cols-auto">
+        <% for (var i = 1; i < data.length; i++) { %>
+          <% var date = new Date(data[i].ReadyTime * 1000 + 9 * 60 * 60 *1000) %>
+          <div class="col mt-3 ">
+            <div class="card" style="height: 15rem; width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= data[i].Name %></h5>
+                <p class="card-text" style="color: blue"><%= data[i].Doctype %></p>
+                <p class="card-text">시간: <%= date.toLocaleTimeString("ko-KR") %></p>
+                <p class="card-text">금액 : <%= data[i].Money %></p>
+                <p class="card-text" style="color: blue">잔액 : <%= data[i].Amount %></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- <div class="col mt-3 ">
+            <div class="card" style="height: 15rem; width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= data1[i].Name %></h5>
+                <p class="card-text" style="color: red"><%= data1[i].Doctype %></p>
+                <p class="card-text">시간: <%= date.toLocaleTimeString("ko-KR") %></p>
+                <p class="card-text">금액 : <%= data1[i].Money %></p>
+                <p class="card-text">목적 : <%= data1[i].Purpose %></p>               
+                <p class="card-text" style="color: red">잔액 : <%= data1[i].Amount %></p>
+              </div>
+            </div>
+          </div>
+      </div> -->
+    <% } %>
+    <% } %>
+
+    <!-- //////////////////////////////////////////////////////////////////////////////////// -->
+
+  </body>
+</html>

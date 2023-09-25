@@ -1,0 +1,1 @@
+[{"ReadyTime":1695623037,"Money":5000,"Amount":0,"Purpose":"Test","Doctype":"outputmoney"}]
